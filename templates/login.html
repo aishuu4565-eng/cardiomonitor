@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | CardioGuard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <div class="logo-box">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo">
+        <h1>CardioGuard</h1>
+    </div>
+
+    <form method="POST" action="/login">
+
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <p class="bottom-text">
+        Don't have an account?
+        <a href="/signup">Sign Up</a>
+    </p>
+
+</div>
+
+</body>
+</html>

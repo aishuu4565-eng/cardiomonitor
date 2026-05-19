@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard | CardioGuard</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <!-- LEFT -->
+    <div class="nav-left">
+        ❤ CardioGuard
+    </div>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+        <a href="/dashboard" class="active">Dashboard</a>
+        <a href="/predict">Predict</a>
+        <a href="/history">History</a>
+        <a href="/about">About</a>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- WELCOME -->
+    <h1>Welcome, {{name}} 👋</h1>
+    
+    <!-- CARDS -->
+    <div class="cards">
+
+        <div class="card-box">
+            <h3>Predict Stroke Risk</h3>
+            <p>Get AI-powered stroke risk analysis</p>
+            <a href="/predict" class="primary-btn">Start Assessment</a>
+        </div>
+
+        <div class="card-box">
+            <h3>View History</h3>
+            <p>Track your previous assessments</p>
+            <a href="/history" class="secondary-btn">View History</a>
+        </div>
+
+        <div class="card-box">
+            <h3>Health Tips</h3>
+            <p>Learn about stroke prevention</p>
+            <a href="/about" class="secondary-btn">Learn More</a>
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+    <div class="stats">
+
+        <div class="stat-box">
+            <p>Total Assessments</p>
+            <h2>{{count}}</h2>
+        </div>
+
+        <div class="stat-box">
+            <p>Age</p>
+            <h2>{{age}}</h2>
+        </div>
+
+        <div class="stat-box">
+            <p>Status</p>
+            <h2>Active</h2>
+        </div>
+
+    </div>
+
+
+    <!-- GRAPH -->
+    <h2 style="margin-top:40px;">Stroke Risk Trend</h2>
+
+    <div style="background:white; padding:20px; border-radius:12px;">
+        <canvas id="chart"></canvas>
+    </div>
+
+</div>
+
+
+<!-- CHART SCRIPT -->
+<script>
+const ctx = document.getElementById('chart').getContext('2d');
+
+// SAFE fallback
+const labels = {{ dates | tojson | safe if dates else '[]' }};
+const dataValues = {{ probs | tojson | safe if probs else '[]' }};
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Risk %',
+            data: dataValues,
+            borderWidth: 3,
+            tension: 0.4
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predict | CardioGuard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="nav-left">
+        ❤ <span>CardioGuard</span>
+    </div>
+
+    <div class="nav-right">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/predict" class="active">Predict</a>
+        <a href="/history">History</a>
+        <a href="/about">About</a>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <h1>Stroke Risk Assessment</h1>
+    <p class="subtitle">Provide accurate details for best prediction</p>
+
+    <div class="form-card">
+        <form method="POST" action="/predict">
+
+            <div class="grid">
+                <!-- NAME -->
+                 <div>
+                    <label>Name *</label>
+                    <input type="text" name="name" required>
+                </div>
+
+                <!-- AGE -->
+                <div>
+                    <label>Age *</label>
+                    <input type="number" name="age" required>
+                </div>
+
+                <!-- GENDER -->
+                <div>
+                    <label>Gender *</label>
+                    <select name="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- HYPERTENSION -->
+                <div>
+                    <label>Hypertension *</label>
+                    <select name="hypertension" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+
+                <!-- HEART DISEASE -->
+                <div>
+                    <label>Heart Disease *</label>
+                    <select name="heart_disease" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+
+                <!-- MARRIED -->
+                <div>
+                    <label>Ever Married *</label>
+                    <select name="married" required>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <!-- WORK TYPE (VERY IMPORTANT VALUES) -->
+                <div>
+                    <label>Work Type *</label>
+                    <select name="work" required>
+                        <option value="Govt_job">Govt_Job</option>
+                        <option value="Private">Private</option>
+                        <option value="Self-employed">Self-employed</option>
+                        <option value="children">Children</option>
+                        <option value="Never_worked">Never worked</option>
+                    </select>
+                </div>
+
+                <!-- RESIDENCE -->
+                <div>
+                    <label>Residence *</label>
+                    <select name="residence" required>
+                        <option value="Rural">Rural</option>
+                        <option value="Urban">Urban</option>
+                    </select>
+                </div>
+
+                <!-- GLUCOSE -->
+                <div>
+                    <label>Glucose Level *</label>
+                    <input type="number" step="0.1" name="glucose" required>
+                </div>
+
+                <!-- BMI -->
+                <div>
+                    <label>BMI *</label>
+                    <input type="number" step="0.1" name="bmi" required>
+                </div>
+
+                <!-- SMOKING -->
+                <div>
+                    <label>Smoking Status *</label>
+                    <select name="smoking" required>
+                        <option value="never smoked">Never</option>
+                        <option value="formerly smoked">Formerly</option>
+                        <option value="smokes">Smokes</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit" class="primary-btn">Predict Risk</button>
+
+        </form>
+
+        {% if prob is not none %}
+        <h2>👤{{ name }}</h2>
+        <h2 class="result {{color}}">
+            Risk: {{result}}
+        </h2>
+        <p>Probability: {{prob}}%</p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

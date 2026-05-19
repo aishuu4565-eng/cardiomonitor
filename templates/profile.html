@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile | CardioGuard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- OVERLAY -->
+<div class="overlay">
+
+    <!-- MODAL -->
+    <div class="modal">
+
+        <div class="modal-header">
+            <h2>Welcome! Let's set up your profile</h2>
+            <a href="/dashboard" class="close-btn">✕</a>
+        </div>
+
+        <p class="subtitle">
+            Please provide your information to get started with CardioGuard.
+        </p>
+
+        <!-- FORM -->
+        <form method="POST" action="/profile" class="profile-form">
+
+            <div class="grid">
+
+                <div>
+                    <label>Full Name *</label>
+                    <input type="text" name="name" placeholder="John Doe" required>
+                </div>
+
+                <div>
+                    <label>Email *</label>
+                    <input type="email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <div>
+                    <label>Age *</label>
+                    <input type="number" name="age" placeholder="30" required>
+                </div>
+
+                <div>
+                    <label>Gender *</label>
+                    <select name="gender" required>
+                        <option value="">Select gender</option>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                        <option value="2">Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Blood Pressure</label>
+                    <select name="bp">
+                        <option value="">Select status</option>
+                        <option value="0">Normal</option>
+                        <option value="1">High</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Cholesterol</label>
+                    <select name="cholesterol">
+                        <option value="">Select level</option>
+                        <option value="0">Normal</option>
+                        <option value="1">High</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Diabetes Status</label>
+                    <select name="diabetes">
+                        <option value="">Select status</option>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Smoking Habits</label>
+                    <select name="smoking">
+                        <option value="">Select habit</option>
+                        <option value="0">Never</option>
+                        <option value="1">Former</option>
+                        <option value="2">Smokes</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Physical Activity</label>
+                    <select name="activity">
+                        <option value="">Select level</option>
+                        <option value="0">Low</option>
+                        <option value="1">Moderate</option>
+                        <option value="2">High</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Create Profile
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

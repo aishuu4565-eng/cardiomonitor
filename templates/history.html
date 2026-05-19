@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>History | CardioGuard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="nav-left">
+        ❤ <span>CardioGuard</span>
+    </div>
+
+    <div class="nav-right">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/predict">Predict</a>
+        <a href="/history" class="active">History</a>
+        <a href="/about">About</a>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+</div>
+
+<div class="main">
+
+    <h1>Assessment History</h1>
+    <p class="subtitle">Track your cardiovascular health assessments</p>
+
+    <div class="history-box">
+
+        {% if data|length == 0 %}
+
+        <div class="empty-state">
+            <h2>📉</h2>
+            <h3>No assessments yet</h3>
+            <p>Start prediction to see your history here</p>
+        </div>
+
+        {% else %}
+
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Probability (%)</th>
+                    <th>Risk</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <!-- SERIAL NUMBER -->
+                    <td>{{ loop.index }}</td>
+
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ "%.2f"|format(row[2]) }}</td>
+
+                    <td class="
+                        {% if row[3]=='Low Risk' %}green
+                        {% elif row[3]=='Moderate Risk' %}orange
+                        {% else %}red
+                        {% endif %}
+                    ">
+                        {{ row[3] }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
